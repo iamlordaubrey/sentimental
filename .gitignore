@@ -1,0 +1,7 @@
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Environment
+#.env  # Commenting this out for testing purposes
