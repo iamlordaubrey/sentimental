@@ -1,11 +1,6 @@
 import { Dish } from "../dishes/dishes.interface";
 import { Review } from "../reviews/reviews.interface";
 
-// if (!process.env.SENTIMENT_API) {
-//   process.exit(1);
-// }
-
-
 export const getSentiment = async (reviews: Review[]): Promise<any[]> => {
   let headers: HeadersInit = {
     "content-type": "application/x-www-form-urlencoded",
@@ -27,19 +22,12 @@ export const getSentiment = async (reviews: Review[]): Promise<any[]> => {
       const sentiment = await fetch(apiURL, {
         method: "POST",
         headers,
-        // body: JSON.stringify(`text=${lineItem.review}`),
         body: new URLSearchParams({
           text: `${lineItem.review}`
         })
       });
 
       return sentiment.json();
-
-      // try {
-      //   return sentiment.json();
-      // } catch (error) {
-      //   console.log('An error occured', error)
-      // }
     });
 
     return Promise.all(promisesArray);

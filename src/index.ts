@@ -3,6 +3,7 @@
  */
 import dotenv from "dotenv";
 import express from "express";
+import * as http from "http";
 import cors from "cors";
 import helmet from "helmet";
 import { dishesRouter } from "./dishes/dishes.router";
@@ -21,7 +22,8 @@ if (!process.env.PORT) {
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
-const app = express();
+const app: express.Application = express();
+const server: http.Server = http.createServer(app);
 
 /**
  *  App Configuration
@@ -35,9 +37,11 @@ app.use("/api/sentiments", sentimentsRouter);
 app.use(errorHandler);
 app.use(notFoundHandler);
 
+export default
+
 /**
  * Server Activation
  */
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

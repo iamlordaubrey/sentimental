@@ -20,23 +20,13 @@ export const sentimentsRouter = express.Router();
 // GET items/:id
 sentimentsRouter.get("/:id", async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
-  // console.log('do we get here', id)
 
   try {
     const dish: Dish = await DishService.find(id);
 
     if (dish) {
-      // console.log('we do get here', dish)
-
-      // const testData = {"id":1,"name":"Ewa Agoyin","reviews":[{"review":"Wow... Loved this place.","numberOfLikes":1},{"review":"Crust is not good.","numberOfLikes":0},{"review":"Not tasty and the texture was just nasty.","numberOfLikes":0}]}
-      const testData = {"id":1,"name":"Ewa Agoyin","reviews":[{"review":"Wow... Loved this place.","numberOfLikes":1}]}
-
-
       // Make the API call
-      // const resp = await getSentiment(testData.reviews)
       const resp = await processSentiment(dish)
-      // console.log('response: ', resp)
-
       return res.status(200).send(resp)
     }
 
